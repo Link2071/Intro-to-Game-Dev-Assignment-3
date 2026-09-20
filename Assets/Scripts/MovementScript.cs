@@ -9,6 +9,7 @@ public class MovementScript : MonoBehaviour
     private float _startTime;
     private float _movementDuration;
     private int _cornersIndex;
+    [SerializeField] private Animator _animator;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -34,6 +35,7 @@ public class MovementScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        _animator.SetTrigger("Move to next Direction");
         if(_cornersIndex < 3)
         {
             _endPos = _corners[_cornersIndex + 1];
