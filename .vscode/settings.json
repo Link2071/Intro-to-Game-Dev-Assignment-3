@@ -67,6 +67,6 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "Intro-to-Game-Dev-Assignment-3.slnx",
+    "dotnet.defaultSolution": "Intro to Game Dev Assignment 3.slnx",
     "dotnet.enableWorkspaceBasedDevelopment": false
 }
