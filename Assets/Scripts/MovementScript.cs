@@ -13,10 +13,10 @@ public class MovementScript : MonoBehaviour
     void Start()
     {
         _corners = new Vector3[4];
-        _corners[0] = new Vector3(6.5f, -1.5f, 0);
-        _corners[1] = new Vector3(1.5f, -1.5f, 0);
-        _corners[2] = new Vector3(1.5f, -5.5f, 0);
-        _corners[3] = new Vector3(6.5f, -5.5f, 0);
+        _corners[0] = new Vector3(1.5f, -1.5f, 0);
+        _corners[1] = new Vector3(6.5f, -1.5f, 0);
+        _corners[2] = new Vector3(6.5f, -5.5f, 0);
+        _corners[3] = new Vector3(1.5f, -5.5f, 0);
 
         _endPos = _corners[0];
         _cornersIndex = 0;
