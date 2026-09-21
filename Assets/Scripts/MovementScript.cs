@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class MovementScript : MonoBehaviour
@@ -6,9 +5,9 @@ public class MovementScript : MonoBehaviour
     private Vector3[] _corners;
     private Vector3 _endPos;
     private Vector3 _startPos;
-    private float _startTime;
     private float _movementDuration;
     private int _cornersIndex;
+    private float _t;
     [SerializeField] private Animator _animator;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,15 +21,14 @@ public class MovementScript : MonoBehaviour
         _endPos = _corners[0];
         _cornersIndex = 0;
         _startPos = transform.position;
-        _startTime = Time.time;
         _movementDuration = Vector3.Distance(_startPos, _endPos);
     }
 
     // Update is called once per frame
     void Update()
     {
-        float t = (Time.time - _startTime) / _movementDuration;
-        transform.position = Vector3.Lerp(_startPos, _endPos, t);
+        _t += Time.deltaTime / _movementDuration;
+        transform.position = Vector3.Lerp(_startPos, _endPos, _t);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -38,18 +36,19 @@ public class MovementScript : MonoBehaviour
         _animator.SetTrigger("Move to next Direction");
         if(_cornersIndex < 3)
         {
-            _endPos = _corners[_cornersIndex + 1];
-            _cornersIndex++;
-            _startPos = transform.position;
-            _startTime = Time.time;
-            _movementDuration = Vector3.Distance(_startPos, _endPos);
+            initiateMovement(_cornersIndex + 1);
             return;
         }
 
-        _endPos = _corners[0];
-        _cornersIndex = 0;
+        initiateMovement(0);
+    }
+
+    private void initiateMovement(int cornersIndex)
+    {
+        _t = 0;
+        _cornersIndex = cornersIndex;
+        _endPos = _corners[_cornersIndex];
         _startPos = transform.position;
-        _startTime = Time.time;
         _movementDuration = Vector3.Distance(_startPos, _endPos);
     }
 }
